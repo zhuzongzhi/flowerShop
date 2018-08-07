@@ -12,7 +12,7 @@
         </div>
 
         <!-- 分类 -->
-        <div style="text-align:center;">
+        <div class="categoryCls">
             <div v-for="(item, index) in categoryList" :key="index" class="categoryListCls">
                 <div class="categoryImg">
                     <img :src="item.categoryIconSrc" :alt="item.categoryName">
@@ -135,13 +135,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    .categoryCls {
+        text-align:center;
+        :hover {
+            background-color: #F5F5F5;
+        }
+    }
+
     .categoryListCls {
         display: inline;
         width: 25%;
         float: left;
         margin: 0 auto;
-        margin-top: 50rpx;
-        margin-bottom: 50rpx;
+        padding-top: 50rpx;
+        padding-bottom: 50rpx;
     }
 
     .categoryImg {
