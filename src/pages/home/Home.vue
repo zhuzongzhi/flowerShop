@@ -44,9 +44,11 @@
                         <span style="color: #C3C3C3;float: right;">销售：0</span>
                     </div>
                 </div>
-                    
-                
             </div>
+        </div>
+
+        <div style="margin:0 auto;">
+            <button type="default" size="dafault"  class="queryMore">点击查看更多</button>
         </div>
 
         </scroll-view>
@@ -214,6 +216,12 @@ export default {
         div {
             margin: 10rpx 0 10rpx 5rpx;
         }
+    }
+
+    .queryMore {
+        width: 80%;
+        font-size: 30rpx;
+        margin-bottom: 30rpx;
     }
 </style>
 
