@@ -35,4 +35,9 @@ router.post('/message', controllers.message.post)
 // demo 测试
 router.get('/demo', controllers.demo)
 
+// 花卉接口 flower 
+router.get('/flower/queryFlowers', controllers.flower.queryFlowers)
+router.post('/flower/updateSertFlower', controllers.flower.updateSertFlower)
+router.post('/flower/removeFlowers', controllers.flower.removeFlowers)
+
 module.exports = router

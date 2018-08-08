@@ -17,7 +17,7 @@ CREATE TABLE `flower` (
   `create_id` int(11) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_id` int(11) NOT NULL,
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -28,13 +28,14 @@ DROP TABLE IF EXISTS `flowerType`;
 CREATE TABLE `flowerType` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_name` varchar(20) NOT NULL,
+  `type_icon_path` varchar(200) NOT NULL,
   `group_standard` int(4) NOT NULL DEFAULT 0, -- 0: 按产品分类  1：按用途分类
 
   `deleted` boolean NOT NULL DEFAULT 0,
   `create_id` int(11) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_id` int(11) NOT NULL,
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
