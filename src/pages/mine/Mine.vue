@@ -3,12 +3,15 @@
         <div class="upperHalf">
             <!-- 点击授权 -->
             <div class="authorizationInfo">
-                <div class="clickAuthorization">
-                    点击授权
+                <div class="clickAuthorization" @click="login">
+                    <button open-type="getUserInfo" lang="zh_CN" @click="login" class="loginBtn">
+                        点击登录
+                    </button>
                 </div>
 
                 <div class="memberInfo">
-                    <div>未授权</div>
+                    <div v-show="false">未授权</div>
+                    <div v-show="userinfo">{{userinfo.nickName}}</div>
                     <div style="display: block;">普通会员</div>
                 </div>
             </div>
@@ -17,7 +20,7 @@
             <div style="margin: 10rpx 20rpx 10rpx 20rpx;">
                 <div class="orderTitle">
                     <span style="font-weight: bold;">查看订单</span>
-                    <img :src='moreSrc' class="moreSrcCls" style="float: right;"/>
+                    <img :src='moreSrc' class="moreSrcCls" style="float: right;margin-top:6rpx;"/>
                     <span style="float: right;color: #A6A6A6;">全部订单</span>
                 </div>
 
@@ -69,6 +72,11 @@
 </template>
 
 <script>
+import qcloud from 'wafer2-client-sdk'
+import config from '@/utils/config'
+import {post} from '@/utils/ajax'
+import {showSuccess, showModal} from '@/utils/index'
+
 export default {
     data () {
         return {
@@ -95,8 +103,52 @@ export default {
                 }
             ],
             moreSrc: '/static/img/home/more.png',
+            userinfo: {},
 
         }
+    },
+    methods: {
+        // 初始化
+        init () {
+            let self = this;
+
+            let userinfo = wx.getStorageSync('userinfo');
+            if (userinfo) {
+                self.userinfo = userinfo;
+            }
+        },
+
+        // 登录
+        login () {
+            let user = wx.getStorageSync('userinfo');
+            console.log('user', user);
+            const self = this;
+            if (!user) {
+                qcloud.setLoginUrl(config.loginUrl)
+                console.log('开始登录');
+                qcloud.login({
+                    success: function (userinfo) {
+                        console.log('回调成功');
+                        qcloud.request({
+                        url: config.userUrl,
+                        login: true,
+                        success (userRes) {
+                            showSuccess('登录成功')
+                            wx.setStorageSync('userinfo', userRes.data.data)
+                            self.userinfo = userRes.data.data
+                        }
+                        })
+                    },
+                    fail: function (err) {
+                        console.log('登录失败', err);
+                    }
+                })
+            }
+        }
+    },
+    mounted() {
+        let self = this;
+        self.init();
     }
 }
 </script>
@@ -111,6 +163,14 @@ export default {
         height: 225rpx;
         background-color: #FFCDD6;
         padding: 75rpx 0 0 0;
+
+        .loginBtn {
+            position: static;
+            border: none;
+            display: inline;
+            font-size: 30rpx;
+            padding-left: 0;
+        }
 
         .clickAuthorization {
             height: 150rpx;
@@ -177,6 +237,7 @@ export default {
 
             img {
                 color: #EFEFF4;
+                margin-top:6rpx;
             }
         }
     }
