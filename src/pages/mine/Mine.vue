@@ -14,7 +14,18 @@
 
         <!-- 查看订单 -->
         <div>
+            <div class="orderTitle">
+                <span>查看订单</span>
+                <span>全部订单</span>
+                <!-- <img src='/static/img/home/more' /> -->
+            </div>
 
+            <div class="orderStatus">
+                <div v-for="(item, index) in orderStatus" :key="index">
+                    <img :src="item.iconSrc" :alt="item.iconName" />
+                    <span>{{item.iconName}}</span>
+                </div>
+            </div>
         </div>
 
         <!-- other -->
@@ -29,6 +40,28 @@
 export default {
     data () {
         return {
+            orderStatus: [
+                {
+                    iconSrc: '/static/img/mine/pendingPayment.png',
+                    iconName: '待付款'
+                },
+                {
+                    iconSrc: '/static/img/mine/pendingDelivery.png',
+                    iconName: '待发货'
+                },
+                {
+                    iconSrc: '/static/img/mine/pendingReceipt.png',
+                    iconName: '待收货'
+                },
+                {
+                    iconSrc: '/static/img/mine/pendingEvaluate.png',
+                    iconName: '待评价'
+                },
+                {
+                    iconSrc: '/static/img/mine/returnGoods.png',
+                    iconName: '退货/售后'
+                }
+            ],
 
         }
     }
@@ -63,6 +96,21 @@ export default {
             div {
                 display: inline-block;
                 width: 200rpx;
+            }
+        }
+    }
+
+    .orderTitle {
+        border-bottom: 1px solid #666;
+    }
+
+    .orderStatus {
+
+        div {
+
+            img {
+                width: 50rpx;
+                height: 50rpx;
             }
         }
     }

@@ -125,6 +125,7 @@ export default {
                 vm.flowers = [...res.list, ...res.list];
                 console.log('flowers', vm.flowers);
             }
+            
 
         }
     },
