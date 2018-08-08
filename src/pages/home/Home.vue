@@ -31,17 +31,17 @@
             </div>
 
             <div class="flowers" v-for="(item, index) in flowers" :key="index">
-                <img :src="item.flowerSrc" :alt="item.flowerName" class="flowerImg">
+                <img :src="item.flowerSrc || '/static/img/flower1.jpg'" :alt="item.flower_name" class="flowerImg">
                 <div class="flowerInfo">
-                    <div>一心只有您</div>
-                    <div style="color: #C3C3C3;">中山花.言 花店</div>
+                    <div>{{item.flower_name}}</div>
+                    <div style="color: #C3C3C3;">{{item.flower_language}}</div>
                     <div>
-                        <span style="color: red;">￥139.00 </span>
-                        <span style="color: #C3C3C3;text-decoration: line-through;"> 原价 ￥288.0</span>
+                        <span style="color: red;">￥{{item.flower_current_price}} </span>
+                        <span style="color: #C3C3C3;text-decoration: line-through;"> 原价 ￥{{item.flower_origina_price}}</span>
                     </div>
                     <div>
-                        <span style="color: #C3C3C3;">新上架</span>
-                        <span style="color: #C3C3C3;float: right;">销售：0</span>
+                        <span style="color: #C3C3C3;">{{item.is_new_product ? '新上架' : ''}}</span>
+                        <span style="color: #C3C3C3;float: right;">销售：{{item.sales_volume}}</span>
                     </div>
                 </div>
             </div>
@@ -56,6 +56,8 @@
 </template>
 
 <script>
+import {get, post} from '@/utils/ajax'
+
 export default {
     data () {
         return {
@@ -101,35 +103,35 @@ export default {
                     categoryPath: ''
                 }
             ],
-            flowers: [
-                {
-                    flowerSrc: '/static/img/flower1.jpg',
-                    flowerName: '花束1'
-                },
-                {
-                    flowerSrc: '/static/img/flower1.jpg',
-                    flowerName: '花束2'
-                },
-                {
-                    flowerSrc: '/static/img/flower1.jpg',
-                    flowerName: '花束3'
-                },
-                {
-                    flowerSrc: '/static/img/flower1.jpg',
-                    flowerName: '花束4'
-                },
-                {
-                    flowerSrc: '/static/img/flower1.jpg',
-                    flowerName: '花束5'
-                },
-                {
-                    flowerSrc: '/static/img/flower1.jpg',
-                    flowerName: '花束6'
-                }
-            ],
+            flowers: [],
             moreSrc: '/static/img/home/more.png',
+            pageNo: 1,
+            pageSize: 20,
+            more: false,
+        }
+    },
+    methods: {
+        async init(init) {
+            let vm = this;
+
+            if (init) {
+                this.page = 1;
+                this.more = true;
+            }
+
+            const res = await get('/weapp/flower/queryFlowers', {pageNo: this.pageNo});
+
+            if (res && res.list.length) {
+                vm.flowers = [...res.list, ...res.list];
+                console.log('flowers', vm.flowers);
+            }
 
         }
+    },
+    mounted () {
+        let vm = this;
+
+        vm.init(true);
     }
 }
 </script>
