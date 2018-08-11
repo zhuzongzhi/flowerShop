@@ -59,16 +59,27 @@ export default {
       await post('/weapp/address/updateSertAddress', saveParams);
       wx.hideNavigationBarLoading();
 
-      showModal('添加成功', `地址添加成功`);
+      await showModal('添加成功', `地址添加成功`);
 
+      setTimeout(function () {
+        wx.navigateTo({url: `../main`});
+      }, 1000);
     },
 
+    // 参数校验
+    validateParams () {
+      let self = this;
+
+      
+    },
+
+    // 选择区域变化
     bindRegionChange: function (e) {
       console.log('picker发送选择改变，携带值为', e.target.value)
       this.region = e.target.value;
     }
 
-    
+
   },
   mounted () {
     let self = this;

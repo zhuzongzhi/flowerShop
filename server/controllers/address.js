@@ -16,7 +16,7 @@ async function queryAddress (ctx, next) {
     const mysqlSelect = mysql('address')
                   .select('address.*')
                   .where({'open_id': open_id, deleted: 0})
-                  .orderBy('address.create_time', 'desc')
+                  .orderBy('address.create_time', 'desc');
 
     let addressList = await mysqlSelect.limit(pageSize).offset((Number(pageNo)-1)*pageSize);
 

@@ -23,8 +23,8 @@ export default {
       'pages/mine/coupon/main',
       'pages/mine/collect/main',
       'pages/mine/personalCenter/main',
-      'pages/mine/addressManager/main',
-      '^pages/mine/addressManager/addNewAddress/main'
+      '^pages/mine/addressManager/main',
+      'pages/mine/addressManager/addNewAddress/main'
     ],
     window: {
       backgroundTextStyle: 'light',

@@ -6,6 +6,7 @@ app.$mount()
 
 export default {
     config: {
-        "navigationBarTitleText": "地址管理"
+        "navigationBarTitleText": "地址管理",
+        enablePullDownRefresh: true
     }
 }
