@@ -44,7 +44,7 @@ CREATE TABLE `flowerType` (
 DROP TABLE IF EXISTS `address`;
 
 CREATE TABLE `address` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `open_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `receiver` varchar(20) NOT NULL,
   `receiver_phone` varchar(11) NOT NULL,

@@ -74,7 +74,7 @@
 <script>
 import qcloud from 'wafer2-client-sdk'
 import config from '@/utils/config'
-import {post} from '@/utils/ajax'
+import {post, login} from '@/utils/ajax'
 import {showSuccess, showModal} from '@/utils/index'
 
 export default {
@@ -119,31 +119,11 @@ export default {
         },
 
         // 登录
-        login () {
-            let user = wx.getStorageSync('userinfo');
-            console.log('user', user);
+        async login () {
             const self = this;
-            if (!user) {
-                qcloud.setLoginUrl(config.loginUrl)
-                console.log('开始登录');
-                qcloud.login({
-                    success: function (userinfo) {
-                        console.log('回调成功');
-                        qcloud.request({
-                        url: config.userUrl,
-                        login: true,
-                        success (userRes) {
-                            showSuccess('登录成功')
-                            wx.setStorageSync('userinfo', userRes.data.data)
-                            self.userinfo = userRes.data.data
-                        }
-                        })
-                    },
-                    fail: function (err) {
-                        console.log('登录失败', err);
-                    }
-                })
-            }
+            
+            let userinfo = await login();
+            self.userinfo = userinfo;
         },
 
         // 跳转到订单

@@ -1,5 +1,6 @@
 // 工具函数库
 import config from './config'
+import {showModal, showSuccess} from './index'
 
 // http get工具函数 获取数据
 export function get (url, data) {
@@ -26,4 +27,35 @@ function request (url, method, data, header = {}) {
       }
     })
   })
+}
+
+export function login () {
+  return new Promise((resolve, reject) => {
+    let user = wx.getStorageSync('userinfo');
+  
+    if (!user) {
+      qcloud.setLoginUrl(config.loginUrl)
+      console.log('开始登录');
+      qcloud.login({
+          success: function (userinfo) {
+              console.log('回调成功');
+              qcloud.request({
+                url: config.userUrl,
+                login: true,
+                success (userRes) {
+                    showSuccess('登录成功')
+                    wx.setStorageSync('userinfo', userRes.data.data);
+                    resolve(userRes.data.data);
+                }
+              })
+          },
+          fail: function (err) {
+              console.log('登录失败', err);
+              reject(userinfo);
+          }
+      })
+    } else {
+      resolve(user);
+    }
+  });
 }

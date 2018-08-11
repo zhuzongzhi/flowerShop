@@ -4,6 +4,7 @@
  */
 
 const {mysql} = require('../qcloud')
+const {guid} = require('../tools/utils');
 
 // 查询地址
 async function queryAddress (ctx, next) {
@@ -49,6 +50,7 @@ async function updateSertAddress (ctx, next) {
 
         if (!addressInfo || addressInfo.length === 0) {
             let insertParam = {
+              id: guid(),
               open_id,
               receiver,
               receiver_phone,
