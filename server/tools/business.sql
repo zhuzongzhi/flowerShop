@@ -40,4 +40,22 @@ CREATE TABLE `flowerType` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
--- 
+-- 收货地址
+DROP TABLE IF EXISTS `address`;
+
+CREATE TABLE `address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `open_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `receiver` varchar(20) NOT NULL,
+  `receiver_phone` varchar(11) NOT NULL,
+  `receiver_region` varchar(100) NOT NULL,
+  `address_detail` varchar(200) NOT NULL,
+
+  `deleted` boolean NOT NULL DEFAULT 0,
+  `create_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -40,4 +40,9 @@ router.get('/flower/queryFlowers', controllers.flower.queryFlowers)
 router.post('/flower/updateSertFlower', controllers.flower.updateSertFlower)
 router.post('/flower/removeFlowers', controllers.flower.removeFlowers)
 
+// 地址接口 address
+router.get('/address/queryAddress', controllers.address.queryAddress)
+router.post('/address/updateSertAddress', controllers.address.updateSertAddress)
+router.post('/address/removeAddress', controllers.address.removeAddress)
+
 module.exports = router

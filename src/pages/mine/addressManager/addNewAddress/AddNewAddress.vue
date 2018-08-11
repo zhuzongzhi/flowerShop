@@ -1,8 +1,10 @@
 <template>
   <div>
     <div class="receiverInfo" style="border-top:10rpx solid #F5F5F5;border-bottom:25rpx solid #F5F5F5;">
-      <div style="border-bottom:1px solid #CACACA;">收 货 人： <input type="text" placeholder="请输入收货人姓名"/></div>
-      <div>手 机 号： <input type="number" placeholder="请输入收货人联系方式"/></div>
+      <div style="border-bottom:1px solid #CACACA;">收 货 人： 
+        <input type="text" placeholder="请输入收货人姓名" v-model="receiver"/>
+      </div>
+      <div>手 机 号： <input type="number" placeholder="请输入收货人联系方式" v-model="receiver_phone"/></div>
     </div>
 
     <div class="addressInfo" style="border-top:10rpx solid #F5F5F5;">
@@ -11,7 +13,9 @@
           所在区域：{{region[0]}}，{{region[1]}}，{{region[2]}}
         </picker>  
       </div>
-      <div style="border-bottom:1px solid #CACACA;">详细地址：<input type="text" placeholder="请输入您的详细地址"/></div>
+      <div style="border-bottom:1px solid #CACACA;">详细地址：
+        <input type="text" placeholder="请输入您的详细地址" v-model="address_detail"/>
+      </div>
     </div>
 
     <div class="saveBtn">
@@ -21,27 +25,42 @@
 </template>
 
 <script>
+import {get, post} from '@/utils/ajax'
+import {showModal} from '@/utils/index'
+
 export default {
   data () {
     return {
-      region: ['江苏省', '南京市', '江宁区'],
+      region: ['北京', '北京市', '东城区'],
       customItem: '全部',
+      pageSize: 10,
+      pageNo: 1,
+      receiver: '',
+      receiver_phone: '',
+      address_detail: ''
       
     }
   },
   methods: {
-    addNewAddress () {
-      let self = this;
-
-      // let url = `./addNewAddress/main`;
-      // wx.navigateTo({url});
-    },
-
     // 保存地址
-    saveAddress () {
+    async saveAddress () {
       let self = this;
+      let user = wx.getStorageSync('userinfo');
 
-      console.log('保存了地址');
+      let saveParams = {
+        open_id: user.openId,
+        receiver: self.receiver,
+        receiver_phone: self.receiver_phone,
+        receiver_region: self.region,
+        address_detail: self.address_detail
+      };
+
+      wx.showNavigationBarLoading();
+      await post('/weapp/address/updateSertAddress', saveParams);
+      wx.hideNavigationBarLoading();
+
+      showModal('添加成功', `地址添加成功`);
+
     },
 
     bindRegionChange: function (e) {
