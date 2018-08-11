@@ -40,10 +40,15 @@ export default {
 
 <style scoped lang="scss">
   .addNewAddress {
-    font-size: 30rpx;
+    font-size: 50rpx;
     background-color: #FD4A5F;
-
-
+    position: fixed;
+    text-align: center;
+    width: 750rpx;
+    height: 120rpx;
+    bottom: 0;
+    color: white;
+    line-height: 120rpx;
   }
 </style>
 
