@@ -7,10 +7,8 @@
 
     <div class="addressInfo" style="border-top:10rpx solid #F5F5F5;">
       <div style="border-bottom:1px solid #CACACA;">
-        所在区域：
-
-        <picker mode="region" :value="region" custom-item="customItem">
-          当前选择：{{region[0]}}，{{region[1]}}，{{region[2]}}
+        <picker mode="region" @change="bindRegionChange" :value="region">
+          所在区域：{{region[0]}}，{{region[1]}}，{{region[2]}}
         </picker>  
       </div>
       <div style="border-bottom:1px solid #CACACA;">详细地址：<input type="text" placeholder="请输入您的详细地址"/></div>
@@ -26,8 +24,9 @@
 export default {
   data () {
     return {
-      region: ['广东省', '广州市', '海珠区'],
-      customItem: '全部'
+      region: ['江苏省', '南京市', '江宁区'],
+      customItem: '全部',
+      
     }
   },
   methods: {
@@ -43,7 +42,14 @@ export default {
       let self = this;
 
       console.log('保存了地址');
+    },
+
+    bindRegionChange: function (e) {
+      console.log('picker发送选择改变，携带值为', e.target.value)
+      this.region = e.target.value;
     }
+
+    
   },
   mounted () {
     let self = this;
