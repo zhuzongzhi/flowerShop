@@ -24,6 +24,7 @@ export default {
       'pages/mine/collect/main',
       'pages/mine/personalCenter/main',
       'pages/mine/addressManager/main',
+      'pages/mine/addressManager/addNewAddress/main'
     ],
     window: {
       backgroundTextStyle: 'light',

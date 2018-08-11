@@ -1,14 +1,6 @@
 <template>
   <div>
-    <!-- 已有地址列表 -->
-    <div>
-
-    </div>
-
-    <!-- 新增地址 -->
-    <div class="addNewAddress" @click="addNewAddress">
-      <span>+添加新地址</span>
-    </div>
+    新增地址
   </div>
 </template>
 
@@ -23,8 +15,8 @@ export default {
     addNewAddress () {
       let self = this;
 
-      let url = `./addNewAddress/main`;
-      wx.navigateTo({url});
+      // let url = `./addNewAddress/main`;
+      // wx.navigateTo({url});
     }
   },
   mounted () {
@@ -39,12 +31,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .addNewAddress {
-    font-size: 30rpx;
-    background-color: #FD4A5F;
-
-
-  }
+  
 </style>
 
 
