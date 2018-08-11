@@ -4,7 +4,7 @@
             <!-- 点击授权 -->
             <div class="authorizationInfo">
                 <div class="clickAuthorization" @click="login">
-                    <button open-type="getUserInfo" lang="zh_CN" @click="login" class="loginBtn">
+                    <button open-type="getUserInfo" lang="zh_CN" class="loginBtn">
                         点击登录
                     </button>
                 </div>
@@ -20,12 +20,12 @@
             <div style="margin: 10rpx 20rpx 10rpx 20rpx;">
                 <div class="orderTitle">
                     <span style="font-weight: bold;">查看订单</span>
-                    <img :src='moreSrc' class="moreSrcCls" style="float: right;margin-top:6rpx;"/>
-                    <span style="float: right;color: #A6A6A6;">全部订单</span>
+                    <img :src='moreSrc' class="moreSrcCls" style="float: right;margin-top:6rpx;"  @click="toAllOrders"/>
+                    <span style="float: right;color: #A6A6A6;"  @click="toAllOrders">全部订单</span>
                 </div>
 
                 <div class="orderStatus">
-                    <div v-for="(item, index) in orderStatus" :key="index">
+                    <div v-for="(item, index) in orderStatus" :key="index" @click="toAllOrders(index+1)">
                         <img :src="item.iconSrc" :alt="item.iconName" />
                         <div>{{item.iconName}}</div>
                     </div>
@@ -41,17 +41,17 @@
                 <span style="float: right;color: #A6A6A6;font-weight: 100;">余额充值</span>
             </div>
 
-            <div>
+            <div @click="toCouponPage">
                 <span>优惠券</span>
                 <img :src='moreSrc' class="moreSrcCls" style="float: right;"/>
             </div>
 
-            <div>
+            <div @click="toCollectPage">
                 <span>我的收藏</span>
                 <img :src='moreSrc' class="moreSrcCls" style="float: right;"/>
             </div>
 
-            <div>
+            <div @click="toAddressManager">
                 <span>地址管理</span>
                 <img :src='moreSrc' class="moreSrcCls" style="float: right;"/>
             </div>
@@ -61,7 +61,7 @@
                 <img :src='moreSrc' class="moreSrcCls" style="float: right;"/>
             </div>
 
-            <div>
+            <div @click="toPersonalCenter">
                 <span>关于我们</span>
                 <img :src='moreSrc' class="moreSrcCls" style="float: right;"/>
             </div>
@@ -144,7 +144,49 @@ export default {
                     }
                 })
             }
-        }
+        },
+
+        // 跳转到订单
+        toAllOrders (orderStatus) {
+            let self = this;
+
+            let url = `./orders/main?orderStatus=${orderStatus}`;
+            wx.navigateTo({url: url});
+        },
+
+        // 跳转到“我的优惠券”
+        toCouponPage () {
+            let self = this;
+
+            let url = `./coupon/main`;
+            wx.navigateTo({url: url});
+        },
+
+        // 跳转到“我的收藏”
+        toCollectPage () {
+            let self = this;
+
+            let url = `./collect/main`;
+            wx.navigateTo({url: url});
+        },
+
+        // 跳转到“个人中心”
+        toPersonalCenter () {
+            let self = this;
+
+            let url = `./personalCenter/main`;
+            wx.navigateTo({url: url});
+        },
+
+        // 跳转到“地址管理”
+        toAddressManager () {
+            let self = this;
+
+            let url = `./addressManager/main`;
+            wx.navigateTo({url: url});
+        },
+
+
     },
     mounted() {
         let self = this;
@@ -163,9 +205,10 @@ export default {
         height: 225rpx;
         background-color: #FFCDD6;
         padding: 75rpx 0 0 0;
+        z-index: -1000;
 
         .loginBtn {
-            position: static;
+            // position: static;
             border: none;
             display: inline;
             font-size: 30rpx;
