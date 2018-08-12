@@ -84,14 +84,14 @@ async function updateSertAddress (ctx, next) {
             };
         }
     }
-} catch (e) {
-    ctx.state = {
-        code: -1,
-        data: {
-            msg: `新增或修改失败:${e.message}`
-        }
-    }
-}
+  } catch (e) {
+      ctx.state = {
+          code: -1,
+          data: {
+              msg: `新增或修改失败:${e.message}`
+          }
+      }
+  }
 }
 
 // 批量删除地址

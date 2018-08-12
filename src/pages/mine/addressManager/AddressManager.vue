@@ -2,8 +2,18 @@
   <div>
     <!-- 已有地址列表 -->
     <div>
-      <div v-for="(item, index) in addressList" :key="index">
-        {{item.receiver}}
+      <div v-for="(item, index) in addressList" :key="index" class="addressCard">
+        <div>
+          <img :src="addressSrc" :alt="addressAlt" class="addressCls"/>
+        </div>
+        <div>
+          <span>{{item.receiver}}</span>
+          <span>{{item.receiver_phone}}</span>
+          <radio :checked="item.checked" style="color: red;"/>设为默认
+
+          <button type="plain">编辑</button>
+          <button type="plain">删除</button>
+        </div>
       </div>
 
       <div v-show="!more">
@@ -29,6 +39,8 @@ export default {
       addressList: [],
       more: true,
       pageNo: 1,
+      addressSrc: '/static/img/mine/address/address.png',
+      addressAlt: '地址',
     }
   },
   methods: {
@@ -101,6 +113,24 @@ export default {
     bottom: 0;
     color: white;
     line-height: 120rpx;
+  }
+
+  .addressCard {
+
+    div {
+      display: inline;
+
+      button {
+        width: 100rpx;
+        font-size: 20rpx;
+        display: inline-block;
+      }
+    }
+  }
+
+  .addressCls {
+    width: 60rpx;
+    height: 60rpx;
   }
 </style>
 

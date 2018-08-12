@@ -50,6 +50,7 @@ CREATE TABLE `address` (
   `receiver_phone` varchar(11) NOT NULL,
   `receiver_region` varchar(100) NOT NULL,
   `address_detail` varchar(200) NOT NULL,
+  `checked` boolean NOT NULL DEFAULT 0,
 
   `deleted` boolean NOT NULL DEFAULT 0,
   `create_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
