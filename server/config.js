@@ -33,6 +33,7 @@ const CONF = {
         user: 'root',
         db: 'cAuth',
         pass: 'root',
+        // pass: 'wx9255111cf8fc28cf',
         char: 'utf8mb4'
     },
 

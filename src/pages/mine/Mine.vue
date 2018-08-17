@@ -122,7 +122,9 @@ export default {
         async login () {
             const self = this;
             
+            debugger;
             let userinfo = await login();
+            debugger;
             self.userinfo = userinfo;
         },
 
